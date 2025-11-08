@@ -1,32 +1,29 @@
-const FINNHUB_API_KEY = "d47kcq9r01qkdqhr49o0d47kcq9r01qkdqhr49og"; // sadece test için
+function loadTradingViewWidget(symbol) {
+    const widgetContainer = document.getElementById("tradingview_0");
+    widgetContainer.innerHTML = "";
 
-function loadFinancialRatios(symbol) {
-    let finnhubSymbol = symbol.replace("BIST:", "") + ".IS";
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js";
+    script.async = true;
 
-    fetch(`https://finnhub.io/api/v1/quote?symbol=${finnhubSymbol}&token=${FINNHUB_API_KEY}`)
-        .then(res => res.json())
-        .then(data => {
-            const valuationBody = document.getElementById("valuationBody");
-            valuationBody.innerHTML = '';
+    script.innerHTML = JSON.stringify({
+        "symbol": symbol,
+        "width": "100%",
+        "locale": "tr",
+        "colorTheme": "light",
+        "isTransparent": false
+    });
 
-            const ratios = {
-                "Güncel Fiyat": data.c,
-                "Açılış Fiyatı": data.o,
-                "Günlük Yüksek": data.h,
-                "Günlük Düşük": data.l,
-                "Önceki Kapanış": data.pc
-            };
-
-            for (const [key, value] of Object.entries(ratios)) {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${key}</td><td>${value}</td>`;
-                valuationBody.appendChild(row);
-            }
-
-            document.getElementById("financialRatios").style.display = "table";
-        })
-        .catch(err => {
-            console.error("Hata:", err);
-            alert("Veri çekme sırasında bir hata oluştu. API key ve sembolü kontrol edin.");
-        });
+    widgetContainer.appendChild(script);
 }
+
+// Varsayılan sembol
+loadTradingViewWidget("BIST:THYAO");
+
+// Form submit
+document.getElementById("symbolForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const newSymbol = document.getElementById("symbolInput").value;
+    loadTradingViewWidget(newSymbol);
+});

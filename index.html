@@ -3,31 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradingView Hisse Verileri ve Bilanço Oranları</title>
+    <title>TradingView Hisse Verileri</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>TradingView Hisse Verileri ve Bilanço Oranları</h1>
+    <h1>TradingView Hisse Verileri</h1>
     <p>Lütfen görüntülemek istediğiniz hisse senedinin sembolünü giriniz (örn. BIST:THYAO):</p>
 
-    <form id="symbolForm" method="GET">
-        <input type="text" name="symbol" id="symbolInput" placeholder="Örn: BIST:THYAO" required>
+    <form id="symbolForm">
+        <input type="text" id="symbolInput" placeholder="Örn: BIST:THYAO" required>
         <button type="submit">Görüntüle</button>
     </form>
 
     <div class="tradingview-widget-container">
         <div id="tradingview_0"></div>
     </div>
-
-    <table id="financialRatios" style="display:none;">
-        <thead>
-            <tr>
-                <th>Oran</th>
-                <th>Değer</th>
-            </tr>
-        </thead>
-        <tbody id="valuationBody"></tbody>
-    </table>
 
     <script src="script.js"></script>
 </body>
