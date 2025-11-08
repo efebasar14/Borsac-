@@ -1,38 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TradingView Hisse Verileri</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>TradingView Hisse Verileri</h1>
-    <p>Lütfen görüntülemek istediğiniz hisse senedinin sembolünü giriniz (ör. BIST:THYAO):</p>
+    <p>Lütfen görüntülemek istediğiniz hisse senedinin sembolünü giriniz (örn. BIST:THYAO):</p>
 
-    <!-- Sembol Girişi -->
-    <form id="symbolForm" method="GET">
-        <input type="text" name="symbol" id="symbolInput" placeholder="Örn: BIST:THYAO" required>
+    <form id="symbolForm">
+        <input type="text" id="symbolInput" placeholder="Örn: BIST:THYAO" required>
         <button type="submit">Görüntüle</button>
     </form>
 
-    <br>
-
-    <!-- TradingView Widget -->
-    <div id="tradingview-widget">
-        <iframe id="tradingview-iframe" 
-                style="width: 100%; height: 600px; border: none;" 
-                src="https://www.tradingview.com/symbols/BIST-THYAO/"></iframe>
+    <div class="tradingview-widget-container">
+        <div id="tradingview_0"></div>
     </div>
 
-    <script>
-        // Form gönderildiğinde iFrame içeriğini güncelle
-        const form = document.getElementById("symbolForm");
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-            const symbolInput = document.getElementById("symbolInput").value;
-            const iframe = document.getElementById("tradingview-iframe");
-            iframe.src = `https://www.tradingview.com/symbols/${symbolInput.replace(':', '-')}/`;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
